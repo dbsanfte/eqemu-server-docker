@@ -39,6 +39,8 @@ RUN mkdir -p $eqemu_server_directory/src && \
     make && \
     chown eqemu:eqemu $eqemu_server_directory/ -R && \
     chmod 755 $eqemu_server_directory/server/*.pl && \
-    chmod 755 $eqemu_server_directory/server/*.sh 
+    chmod 755 $eqemu_server_directory/server/*.sh
+
+USER eqemu 
 
 ENTRYPOINT /bin/bash
