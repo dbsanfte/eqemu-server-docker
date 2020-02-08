@@ -15,7 +15,7 @@ RUN apt-get update -y && \
                        libluabind-dev libmysql++ libperl-dev libperl5i-perl \
                        libwtdbomysql-dev libmysqlclient-dev minizip lua5.1 \
                        make mariadb-client open-vm-tools unzip uuid-dev wget minizip \
-                       zlibc libsodium-dev libsodium18 libjson-perl libssl-dev
+                       zlibc libjson-perl libssl-dev
 RUN wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium-dev_1.0.11-2_amd64.deb -O /tmp/libsodium-dev.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium18_1.0.11-2_amd64.deb -O /tmp/libsodium18.deb && \
     dpkg -i /tmp/libsodium*.deb && \
