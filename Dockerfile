@@ -6,7 +6,9 @@ ENV eqemu_server_directory=/home/eqemu
 ENV EMUBUILDDIR=~/home/eqemu/build
 ENV EMUSRCDIR=/home/eqemu/src
 
-RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted     multiverse" && \
+RUN apt-get update -y && \
+    apt-get install -y software-properties-common apt-transport-https lsb-release && \
+    add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted     multiverse" && \
     apt-get update -y && \
     apt-get install -y curl bash build-essential cmake cpp debconf-utils g++ gcc \
                        git git-core libio-stringy-perl liblua5.1 liblua5.1-dev \
