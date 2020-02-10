@@ -32,7 +32,7 @@ RUN groupadd eqemu && \
     useradd -g eqemu -d $eqemu_server_directory eqemu && \
     mkdir -p $eqemu_server_directory
 
-# Build eqemu
+# Prep folders and clone source
 RUN mkdir -p $eqemu_server_directory/src && \
     mkdir -p $eqemu_server_directory/build && \
     mkdir -p $eqemu_server_directory/server && \
@@ -44,10 +44,12 @@ RUN mkdir -p $eqemu_server_directory/src && \
     git clone https://github.com/EQEmu/Server.git $EMUSRCDIR && \
     cd $EMUSRCDIR && \
     git submodule init && \
-    git submodule update && \
-    cd $EMUBUILDDIR && \
+    git submodule update
+
+# Compile eqemu
+RUN cd $EMUBUILDDIR && \
     cmake $EMUSRCDIR && \
-    make && \
+    make -j `grep -P '^core id\t' /proc/cpuinfo | sort -u | wc -l` LDFLAGS="-all-static" && \
     chown eqemu:eqemu $eqemu_server_directory -R
 
 USER eqemu 
