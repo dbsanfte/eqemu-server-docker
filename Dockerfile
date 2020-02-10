@@ -8,7 +8,8 @@ ENV EMUSRCDIR=/home/eqemu/src
 
 RUN apt-get update -y && \
     apt-get install -y software-properties-common apt-transport-https lsb-release && \
-    add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted     multiverse" && \
+#    add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted     multiverse" && \
+    add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-backports main restricted universe multiverse" && \
     apt-get update -y && \
     apt-get install -y curl bash build-essential cmake cpp debconf-utils g++ gcc \
                        git git-core libio-stringy-perl liblua5.1 liblua5.1-dev \
