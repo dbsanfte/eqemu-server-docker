@@ -1,5 +1,8 @@
 FROM ubuntu:bionic
 
+ARG eqemu_release_tag=latest
+ENV EQEMU_RELEASE_TAG=$eqemu_release_tag
+
 USER root
 
 ENV EQEMU_HOME=/home/eqemu
@@ -33,8 +36,9 @@ RUN groupadd eqemu && \
     mkdir -p $EQEMU_BUILD_DIR
 
 # Prep folders and clone source
-RUN git clone https://github.com/EQEmu/Server.git $EQEMU_SRC_DIR && \
-    cd $EQEMU_SRC_DIR && \
+RUN git clone https://github.com/EQEmu/Server.git $EQEMU_SRC_DIR
+RUN if [ "$EQEMU_RELEASE_TAG" != "latest" ]; then cd $EQEMU_SRC_DIR; git fetch --all --tags --prune; git checkout tags/$EQEMU_RELEASE_TAG; fi;
+RUN cd $EQEMU_SRC_DIR && \
     git submodule init && \
     git submodule update
 
@@ -57,5 +61,6 @@ RUN apt-get remove -y libwtdbomysql-dev && \
     apt-get clean cache
 
 USER eqemu 
+WORKDIR /home/eqemu
 
 ENTRYPOINT /bin/bash
