@@ -52,7 +52,7 @@ RUN apt-get remove -y libwtdbomysql-dev && \
     apt-get remove -y libssl-dev && \
     apt-get autoremove --purge -y && \
     apt-get update -y && \
-    apt-get remove -y git git-core libio-stringy-perl liblua5.1 liblua5.1-dev libluabind-dev libmysql++ libperl-dev libperl5i-perl lua5.1 make mariadb-client open-vm-tools uuid-dev zlibc libjson-perl && \
+    apt-get remove -y git git-core libio-stringy-perl liblua5.1-dev libluabind-dev libmysql++ libperl-dev libperl5i-perl lua5.1 make uuid-dev zlibc libjson-perl && \
     apt-get autoremove --purge -y && \
     apt-get clean cache
 
