@@ -26,8 +26,7 @@ RUN apt-get update -y && \
     apt-get install -y libwtdbomysql-dev && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium-dev_1.0.11-2_amd64.deb -O /tmp/libsodium-dev.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium18_1.0.11-2_amd64.deb -O /tmp/libsodium18.deb && \
-    dpkg -i /tmp/libsodium*.deb && \
-    rm -rf /tmp/*
+    dpkg -i /tmp/libsodium*.deb 
 
 # Set eqemu user
 RUN groupadd eqemu && \
@@ -46,8 +45,15 @@ RUN cd $EQEMU_SRC_DIR && \
 RUN cd $EQEMU_BUILD_DIR && \
     cmake $EQEMU_SRC_DIR && \
     make -j `grep -P '^core id\t' /proc/cpuinfo | sort -u | wc -l` LDFLAGS="-all-static" && \
-    make install && \
-    rm -rf $EQEMU_HOME/*
+    make install
+
+# Copy some needed config files from the source tree
+RUN mkdir -p /tmp/loginserver && \
+    cp $EQEMU_SRC_DIR/loginserver/login_util/* /tmp/loginserver && \
+    rm -rf $EQEMU_HOME/* && \
+    mv /tmp/loginserver/* $EQEMU_HOME && \
+    chown -R eqemu:eqemu $EQEMU_HOME && \
+    rm -rf /tmp/*
 
 # Cleanup the image (TODO: separate build and run containers)
 RUN apt-get remove -y libwtdbomysql-dev && \
