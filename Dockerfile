@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install build prereqs
 RUN apt-get update -y && \
     apt-get install -y wget software-properties-common apt-transport-https lsb-release && \
-    apt-get install -y curl bash build-essential cmake cpp debconf-utils g++ gcc \
+    apt-get install -y curl bash vim build-essential cmake cpp debconf-utils g++ gcc \
                        git git-core libio-stringy-perl liblua5.1 liblua5.1-dev \
                        libluabind-dev libmysql++ libperl-dev libperl5i-perl \
                        libmysqlclient-dev minizip lua5.1 \
@@ -47,7 +47,7 @@ RUN cd $EQEMU_BUILD_DIR && \
 
 # Cleanup the image (TODO: separate build and run containers)
 RUN apt-get remove -y libwtdbomysql-dev && \
-    apt-add-repository --remove http://ftp.de.debian.org/debian && \
+    apt-add-repository --remove "deb http://ftp.de.debian.org/debian stretch main" && \
     apt-get autoremove --purge -y && \
     apt-get remove -y libssl-dev && \
     apt-get autoremove --purge -y && \
