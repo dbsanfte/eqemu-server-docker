@@ -48,25 +48,45 @@ RUN cd $EQEMU_BUILD_DIR && \
     make install
 
 # Copy some needed config files from the source tree
-RUN mkdir -p /tmp/loginserver && \
-    cp $EQEMU_SRC_DIR/loginserver/login_util/* /tmp/loginserver && \
-    rm -rf $EQEMU_HOME/* && \
-    mv /tmp/loginserver/* $EQEMU_HOME && \
-    chown -R eqemu:eqemu $EQEMU_HOME && \
-    rm -rf /tmp/*
+RUN mkdir -p /tmp/eqemuconf && \
+    cp $EQEMU_SRC_DIR/loginserver/login_util/* /tmp/eqemuconf && \
+    cp $EQEMU_SRC_DIR/utils/defaults/eqemu_config.json /tmp/eqemuconf && \
+    cp $EQEMU_SRC_DIR/utils/defaults/log.ini /tmp/eqemuconf && \
+    cp $EQEMU_SRC_DIR/utils/defaults/mime.types /tmp/eqemuconf && \
+    cp $EQEMU_SRC_DIR/utils/defaults/plugin.pl /tmp/eqemuconf
 
-# Cleanup the image (TODO: separate build and run containers)
-RUN apt-get remove -y libwtdbomysql-dev && \
-    apt-add-repository --remove "deb http://ftp.de.debian.org/debian stretch main" && \
-    apt-get autoremove --purge -y && \
-    apt-get remove -y libssl-dev && \
-    apt-get autoremove --purge -y && \
-    apt-get update -y && \
-    apt-get remove -y git git-core libio-stringy-perl liblua5.1-dev libluabind-dev libmysql++ libperl-dev libperl5i-perl lua5.1 make uuid-dev zlibc libjson-perl && \
-    apt-get autoremove --purge -y && \
+# Move files into fresh container to ditch all the cruft:
+FROM ubuntu:bionic
+
+USER root
+
+ENV EQEMU_HOME=/home/eqemu
+ENV EQEMU_BUILD_DIR=/home/eqemu/build
+ENV EQEMU_SRC_DIR=/home/eqemu/src
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install minimal packages
+RUN apt-get update -y && \
+    apt-get install -y bash wget curl vim && \
+    apt-get install -y software-properties-common apt-transport-https lsb-release && \
+    apt-get install -y liblua5.1 debconf-utils mariadb-client unzip minizip && \
+    wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium-dev_1.0.11-2_amd64.deb -O /tmp/libsodium-dev.deb && \
+    wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium18_1.0.11-2_amd64.deb -O /tmp/libsodium18.deb && \
+    dpkg -i /tmp/libsodium*.deb && \
+    rm -rf /tmp/* && \
     apt-get clean cache
 
-USER eqemu 
+# Set eqemu user
+RUN groupadd eqemu && \
+    useradd -g eqemu -d $EQEMU_HOME eqemu && \
+    mkdir -p $EQEMU_HOME && \
+    mkdir -p $EQEMU_BUILD_DIR
+
+COPY --from=0 /usr/local /usr/local
+COPY --from=0 /tmp/eqemuconf/* /home/eqemu/
+
 WORKDIR /home/eqemu
+USER eqemu
 
 ENTRYPOINT /bin/bash
