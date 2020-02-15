@@ -87,6 +87,8 @@ RUN groupadd eqemu && \
 COPY --from=0 /usr/local /usr/local
 COPY --from=0 /tmp/eqemuconf/* /home/eqemu/
 
+RUN chown -R eqemu:eqemu /home/eqemu
+
 WORKDIR /home/eqemu
 USER eqemu
 
