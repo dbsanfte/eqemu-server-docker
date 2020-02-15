@@ -68,7 +68,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Install minimal packages
 RUN apt-get update -y && \
-    apt-get install -y bash wget curl vim && \
+    apt-get install -y bash wget curl vim iputils-ping && \
     apt-get install -y software-properties-common apt-transport-https lsb-release && \
     apt-get install -y liblua5.1 debconf-utils mariadb-client perl unzip minizip \
                         libio-stringy-perl libjson-perl libperl-dev libperl5i-perl && \
