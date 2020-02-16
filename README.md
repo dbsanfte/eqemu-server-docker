@@ -1,5 +1,5 @@
 # eqemu-server-docker
-Builds a standalone Docker image of the EQEmu Server.
+Dolalin's eqemu Docker image home. Builds a standalone Docker image of the EQEmu Server.
 
 ## How to Use
 
@@ -44,16 +44,15 @@ https://github.com/dbsanfte/eqemu-server-docker/blob/master/conf/docker-compose.
 - Create a /home/eqemu folder on your VM 
 - Drop eqemu_conf.json, install_variables.txt and login.json in there (with good settings, see conf for examples)
 - Drop the docker-compose.yml in there
-- Then just do this:
-
-`cd /home/eqemu && docker-compose up -d`
+- `mkdir -p /home/eqemu/shared`
+- Then just do this: `cd /home/eqemu && docker-compose up -d`
 
 ## Setting up the MySQL server for the first time is really hard too. How did you do it?
 
 Here's a simple default setup, obviously it's a bit insecure, but it gets you going:
 
-`sudo apt-get update`
-`sudo apt-get install -y wget curl vim mariadb-server`
+- `sudo apt-get update`
+- `sudo apt-get install -y wget curl vim mariadb-server`
 
 Now:
 
@@ -62,13 +61,13 @@ Now:
 
 Finally, to prime the db:
 
-wget http://edit.peqtgc.com/weekly/peq_beta.zip -O /tmp/peq_beta.zip
-wget https://raw.githubusercontent.com/EQEmu/Server/master/loginserver/login_util/login_schema.sql -O /tmp/login_schema.sql
-cd /tmp/
-unzip -o peq_beta.zip
-mysql -h 127.0.0.1 -uroot -proot peq < peqbeta.sql
-mysql -h 127.0.0.1 -uroot -proot peq < player_tables.sql
-mysql -h 127.0.0.1 -uroot -proot peq < data_tables.sql
-mysql -h 127.0.0.1 -uroot -proot peq < login_schema.sql
+- `wget http://edit.peqtgc.com/weekly/peq_beta.zip -O /tmp/peq_beta.zip`
+- `wget https://raw.githubusercontent.com/EQEmu/Server/master/loginserver/login_util/login_schema.sql -O /tmp/login_schema.sql`
+- `cd /tmp/`
+- `unzip -o peq_beta.zip`
+- `mysql -h 127.0.0.1 -uroot -proot peq < peqbeta.sql`
+- `mysql -h 127.0.0.1 -uroot -proot peq < player_tables.sql`
+- `mysql -h 127.0.0.1 -uroot -proot peq < data_tables.sql`
+- `mysql -h 127.0.0.1 -uroot -proot peq < login_schema.sql`
 
 Now you should have a db that will work with the docker-compose.yml above. 
