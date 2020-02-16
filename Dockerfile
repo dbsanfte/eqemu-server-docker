@@ -50,10 +50,8 @@ RUN cd $EQEMU_BUILD_DIR && \
 # Copy some needed config files from the source tree
 RUN mkdir -p /tmp/eqemuconf && \
     cp $EQEMU_SRC_DIR/loginserver/login_util/* /tmp/eqemuconf && \
-    cp $EQEMU_SRC_DIR/utils/defaults/eqemu_config.json /tmp/eqemuconf && \
     cp $EQEMU_SRC_DIR/utils/defaults/log.ini /tmp/eqemuconf && \
-    cp $EQEMU_SRC_DIR/utils/defaults/mime.types /tmp/eqemuconf && \
-    cp $EQEMU_SRC_DIR/utils/defaults/plugin.pl /tmp/eqemuconf
+    cp $EQEMU_SRC_DIR/utils/defaults/mime.types /tmp/eqemuconf
 
 # Move files into fresh container to ditch all the cruft:
 FROM ubuntu:bionic
@@ -85,7 +83,10 @@ RUN groupadd eqemu && \
     mkdir -p $EQEMU_BUILD_DIR
 
 COPY --from=0 /usr/local /usr/local
-COPY --from=0 /tmp/eqemuconf/* /home/eqemu/
+COPY --from=0 /home/eqemu/src/loginserver/login_util/* /home/eqemu
+COPY --from=0 /home/eqemu/src/utils/defaults/log.ini /home/eqemu
+COPY --from=0 /home/eqemu/utils/defaults/mime.types /home/eqemu
+COPY --from=0 /home/eqemu/utils/patches/* /home/eqemu
 
 RUN chown -R eqemu:eqemu /home/eqemu
 
