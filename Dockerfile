@@ -79,8 +79,8 @@ RUN groupadd eqemu && \
 COPY --from=0 /usr/local /usr/local
 COPY --from=0 /home/eqemu/src/loginserver/login_util/* /home/eqemu/
 COPY --from=0 /home/eqemu/src/utils/defaults/log.ini /home/eqemu
-COPY --from=0 /home/eqemu/utils/defaults/mime.types /home/eqemu
-COPY --from=0 /home/eqemu/utils/patches/* /home/eqemu/
+COPY --from=0 /home/eqemu/src/utils/defaults/mime.types /home/eqemu
+COPY --from=0 /home/eqemu/src/utils/patches/* /home/eqemu/
 
 RUN chown -R eqemu:eqemu /home/eqemu
 
