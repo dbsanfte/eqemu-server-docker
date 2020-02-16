@@ -46,13 +46,7 @@ RUN cd $EQEMU_BUILD_DIR && \
     cmake $EQEMU_SRC_DIR && \
     make -j `grep -P '^core id\t' /proc/cpuinfo | sort -u | wc -l` LDFLAGS="-all-static" && \
     make install
-
-# Copy some needed config files from the source tree
-RUN mkdir -p /tmp/eqemuconf && \
-    cp $EQEMU_SRC_DIR/loginserver/login_util/* /tmp/eqemuconf && \
-    cp $EQEMU_SRC_DIR/utils/defaults/log.ini /tmp/eqemuconf && \
-    cp $EQEMU_SRC_DIR/utils/defaults/mime.types /tmp/eqemuconf
-
+    
 # Move files into fresh container to ditch all the cruft:
 FROM ubuntu:bionic
 
