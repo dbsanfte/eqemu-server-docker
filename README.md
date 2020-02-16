@@ -32,3 +32,14 @@ The WORKDIR is set to /home/eqemu, where the EQEmu configuration files are store
 You probably want to edit the eqemu_config.json and/or login.json and mount them into the container as volumes at runtime with your own config. These are just the defaults copied out of the source tree.
 
 The default ENTRYPOINT on the image is /bin/bash, at some point I will add a startup.sh shim script here and make everything configurable by ENV variables. For now, mount in your config files and vary the ENTRYPOINT to one of the above executables, depending on what you want to run (login server, zone server, world server, etc). 
+
+## This is really complicated, can't you just give me a docker-compose.yml?
+
+Yep I can.
+
+Assuming you have a MySQL database with the Project EQ schema loaded up and accessible on 127.0.0.1, with a root login of root/root, you can use this docker-compose.yml to bring up a full PEQ stack:
+
+
+
+`docker-compose up -d`
+
