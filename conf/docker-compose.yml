@@ -1,0 +1,106 @@
+version: '3'
+services:
+  maps:
+    container_name: eqemu-maps
+    image: dbsanfte/eqemu-maps:latest
+    stdin_open: true
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - maps:/home/eqemu/maps
+    tty: true
+  quests:
+    container_name: eqemu-quests
+    image: dbsanfte/eqemu-quests:latest
+    stdin_open: true
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - quests:/home/eqemu/quests
+    tty: true
+  server-utils:
+    container_name: eqemu-server-utils
+    image: dbsanfte/eqemu-server-utils:latest
+    stdin_open: true
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - utils:/home/eqemu/utils
+    tty: true
+  admin-container:
+    container_name: eqemu-admin-container
+    image: dbsanfte/eqemu-server:latest
+    stdin_open: true
+    restart: unless-stopped
+    network_mode: host
+    tty: true
+    volumes:
+      - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
+      - /home/eqemu/login.json:/home/eqemu/login.json
+      - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - quests:/home/eqemu/quests
+      - maps:/home/eqemu/maps
+      - utils:/home/eqemu/utils
+  shared-memory:
+    container_name: shared-memory
+    image: dbsanfte/eqemu-server:latest
+    entrypoint: /usr/local/bin/shared_memory
+    stdin_open: true
+    restart: unless-stopped
+    network_mode: host
+    tty: true
+    ipc: "host"
+    volumes:
+      - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
+      - /home/eqemu/login.json:/home/eqemu/login.json
+      - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - quests:/home/eqemu/quests
+      - maps:/home/eqemu/maps
+      - utils:/home/eqemu/utils
+  zone:
+    image: dbsanfte/eqemu-server:latest
+    entrypoint: /usr/local/bin/zone
+    stdin_open: true
+    restart: unless-stopped
+    network_mode: host
+    tty: true
+    ipc: "host"
+    volumes:
+      - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
+      - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - quests:/home/eqemu/quests
+      - maps:/home/eqemu/maps
+      - utils:/home/eqemu/utils
+  world:
+    image: dbsanfte/eqemu-server:latest
+    entrypoint: /usr/local/bin/world
+    stdin_open: true
+    restart: unless-stopped
+    network_mode: host
+    tty: true
+    ipc: "host"
+    volumes:
+      - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
+      - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - quests:/home/eqemu/quests
+      - maps:/home/eqemu/maps
+      - utils:/home/eqemu/utils
+  login:
+    image: dbsanfte/eqemu-server:latest
+    entrypoint: /usr/local/bin/loginserver
+    stdin_open: true
+    restart: unless-stopped
+    network_mode: host
+    tty: true
+    ipc: "host"
+    volumes:
+      - /home/eqemu/login.json:/home/eqemu/login.json
+      - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
+      - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - quests:/home/eqemu/quests
+      - maps:/home/eqemu/maps
+      - utils:/home/eqemu/utils
+volumes:
+  maps:
+  quests:
+  utils:
