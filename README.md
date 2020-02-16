@@ -69,7 +69,6 @@ Finally, to prime the db:
 - `unzip -o peq_beta.zip`
 - `mysql -h 127.0.0.1 -uroot -proot peq < peqbeta.sql`
 - `mysql -h 127.0.0.1 -uroot -proot peq < player_tables.sql`
-- `mysql -h 127.0.0.1 -uroot -proot peq < data_tables.sql`
 - `mysql -h 127.0.0.1 -uroot -proot peq < login_schema.sql`
 
 Now you should have a db that will work with the docker-compose.yml above. 
