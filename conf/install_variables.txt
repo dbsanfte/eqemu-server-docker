@@ -1,0 +1,4 @@
+mysql_root:root
+mysql_eqemu_db_name:peq
+mysql_eqemu_user:root
+mysql_eqemu_password:root
