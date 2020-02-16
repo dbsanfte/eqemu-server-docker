@@ -39,7 +39,9 @@ Yep I can.
 
 Assuming you have a MySQL database with the Project EQ schema loaded up and accessible on 127.0.0.1, with a root login of root/root, you can use this docker-compose.yml to bring up a full PEQ stack:
 
+https://github.com/dbsanfte/eqemu-server-docker/blob/master/conf/docker-compose.yml
 
+Create a /home/eqemu folder, drop eqemu_conf.json, install_variables.txt and login.json in there (with good settings, see conf for examples), then download docker-compose.yml there, and from /home/eqemu just do this:
 
 `docker-compose up -d`
 
