@@ -44,6 +44,7 @@ https://github.com/dbsanfte/eqemu-server-docker/blob/master/conf/docker-compose.
 - Create a /home/eqemu folder on your VM 
 - Drop eqemu_conf.json, install_variables.txt and login.json in there (with good settings, see conf for examples)
 - Drop the docker-compose.yml in there
+- `mkdir -p /home/eqemu/shared`
 - Then just do this:
 
 `cd /home/eqemu && docker-compose up -d`
