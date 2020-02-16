@@ -1,5 +1,5 @@
 # eqemu-server-docker
-Builds a standalone Docker image of the EQEmu Server.
+Dolalin's eqemu Docker image home. Builds a standalone Docker image of the EQEmu Server.
 
 ## How to Use
 
