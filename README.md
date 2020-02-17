@@ -45,7 +45,9 @@ https://github.com/dbsanfte/eqemu-server-docker/blob/master/conf/docker-compose.
 - Drop eqemu_conf.json, install_variables.txt and login.json in there (with good settings, see conf for examples)
 - Drop the docker-compose.yml in there
 - `mkdir -p /home/eqemu/shared`
-- Then just do this: `cd /home/eqemu && docker-compose up -d`
+- Then just do this: `cd /home/eqemu && docker-compose up -d --scale zone=10`
+
+Change `10` in the above command to however many zone servers you want to run. 
 
 ## Setting up the MySQL server for the first time is really hard too. How did you do it?
 
@@ -67,7 +69,6 @@ Finally, to prime the db:
 - `unzip -o peq_beta.zip`
 - `mysql -h 127.0.0.1 -uroot -proot peq < peqbeta.sql`
 - `mysql -h 127.0.0.1 -uroot -proot peq < player_tables.sql`
-- `mysql -h 127.0.0.1 -uroot -proot peq < data_tables.sql`
 - `mysql -h 127.0.0.1 -uroot -proot peq < login_schema.sql`
 
 Now you should have a db that will work with the docker-compose.yml above. 
