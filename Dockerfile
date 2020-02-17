@@ -82,7 +82,8 @@ COPY --from=0 /home/eqemu/src/utils/defaults/log.ini /home/eqemu
 COPY --from=0 /home/eqemu/src/utils/defaults/mime.types /home/eqemu
 COPY --from=0 /home/eqemu/src/utils/patches/* /home/eqemu/
 
-RUN chown -R eqemu:eqemu /home/eqemu
+RUN ln -s /usr/local/bin /home/eqemu/bin && \
+    chown -R eqemu:eqemu /home/eqemu
 
 WORKDIR /home/eqemu
 USER eqemu
