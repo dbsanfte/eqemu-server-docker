@@ -37,7 +37,7 @@ The default ENTRYPOINT on the image is /bin/bash, at some point I will add a sta
 
 Yep I can.
 
-Assuming you have a MySQL database with the Project EQ schema loaded up and accessible on 127.0.0.1, with a root login of root/root, you can use this docker-compose.yml to bring up a full PEQ stack:
+Assuming you have a MySQL database with the Project EQ schema loaded up and accessible on 127.0.0.1, with a root login of root/root, you can use this docker-compose.yml to bring up a full EQEmu stack:
 
 https://github.com/dbsanfte/eqemu-server-docker/blob/master/conf/docker-compose.yml
 
