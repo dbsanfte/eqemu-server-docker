@@ -46,7 +46,6 @@ services:
     image: dbsanfte/eqemu-server:latest
     entrypoint: /usr/local/bin/shared_memory
     stdin_open: true
-    restart: "no"
     network_mode: host
     tty: true
     ipc: "host"
