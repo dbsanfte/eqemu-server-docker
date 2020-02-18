@@ -65,6 +65,9 @@ services:
     network_mode: host
     tty: true
     ipc: "host"
+    depends_on:
+      - shared_memory
+      - world
     volumes:
       - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
       - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
@@ -79,6 +82,9 @@ services:
     network_mode: host
     tty: true
     ipc: "host"
+    depends_on:
+      - shared_memory
+      - login
     volumes:
       - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
       - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
