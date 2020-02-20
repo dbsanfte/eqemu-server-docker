@@ -18,15 +18,6 @@ services:
     volumes:
       - quests:/home/eqemu/quests
     tty: true
-  server-utils:
-    container_name: eqemu-server-utils
-    image: dbsanfte/eqemu-server-utils:latest
-    stdin_open: true
-    restart: unless-stopped
-    network_mode: host
-    volumes:
-      - utils:/home/eqemu/utils
-    tty: true
   admin-container:
     container_name: eqemu-admin-container
     image: dbsanfte/eqemu-server:latest
@@ -41,7 +32,6 @@ services:
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
-      - utils:/home/eqemu/utils
   shared-memory:
     container_name: shared-memory
     image: dbsanfte/eqemu-server:latest
@@ -57,7 +47,6 @@ services:
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
-      - utils:/home/eqemu/utils
   zone:
     image: dbsanfte/eqemu-server:latest
     entrypoint: /usr/local/bin/zone
@@ -75,7 +64,6 @@ services:
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
-      - utils:/home/eqemu/utils
   world:
     image: dbsanfte/eqemu-server:latest
     entrypoint: /usr/local/bin/world
@@ -93,7 +81,6 @@ services:
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
-      - utils:/home/eqemu/utils
   login:
     image: dbsanfte/eqemu-server:latest
     entrypoint: /usr/local/bin/loginserver
@@ -109,8 +96,6 @@ services:
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
-      - utils:/home/eqemu/utils
 volumes:
   maps:
   quests:
-  utils:
