@@ -81,6 +81,7 @@ COPY --from=0 /home/eqemu/src/loginserver/login_util/* /home/eqemu/
 COPY --from=0 /home/eqemu/src/utils/defaults/log.ini /home/eqemu
 COPY --from=0 /home/eqemu/src/utils/defaults/mime.types /home/eqemu
 COPY --from=0 /home/eqemu/src/utils/patches/* /home/eqemu/
+COPY --from=0 /home/eqemu/src/utils /home/eqemu/utils
 
 RUN ln -s /usr/local/bin /home/eqemu/bin && \
     chown -R eqemu:eqemu /home/eqemu
