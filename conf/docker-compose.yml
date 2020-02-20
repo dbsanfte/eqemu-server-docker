@@ -38,6 +38,7 @@ services:
       - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
       - /home/eqemu/login.json:/home/eqemu/login.json
       - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
       - utils:/home/eqemu/utils
@@ -46,7 +47,6 @@ services:
     image: dbsanfte/eqemu-server:latest
     entrypoint: /usr/local/bin/shared_memory
     stdin_open: true
-    restart: unless-stopped
     network_mode: host
     tty: true
     ipc: "host"
@@ -54,6 +54,7 @@ services:
       - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
       - /home/eqemu/login.json:/home/eqemu/login.json
       - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
       - utils:/home/eqemu/utils
@@ -65,9 +66,13 @@ services:
     network_mode: host
     tty: true
     ipc: "host"
+    depends_on:
+      - shared-memory
+      - world
     volumes:
       - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
       - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
       - utils:/home/eqemu/utils
@@ -79,9 +84,13 @@ services:
     network_mode: host
     tty: true
     ipc: "host"
+    depends_on:
+      - shared-memory
+      - login
     volumes:
       - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
       - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
       - utils:/home/eqemu/utils
@@ -97,6 +106,7 @@ services:
       - /home/eqemu/login.json:/home/eqemu/login.json
       - /home/eqemu/eqemu_config.json:/home/eqemu/eqemu_config.json
       - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
+      - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
       - utils:/home/eqemu/utils

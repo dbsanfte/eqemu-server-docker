@@ -37,7 +37,7 @@ The default ENTRYPOINT on the image is /bin/bash, at some point I will add a sta
 
 Yep I can.
 
-Assuming you have a MySQL database with the Project EQ schema loaded up and accessible on 127.0.0.1, with a root login of root/root, you can use this docker-compose.yml to bring up a full PEQ stack:
+Assuming you have a MySQL database with the Project EQ schema loaded up and accessible on 127.0.0.1, with a root login of root/root, you can use this docker-compose.yml to bring up a full EQEmu stack:
 
 https://github.com/dbsanfte/eqemu-server-docker/blob/master/conf/docker-compose.yml
 
@@ -71,4 +71,14 @@ Finally, to prime the db:
 - `mysql -h 127.0.0.1 -uroot -proot peq < player_tables.sql`
 - `mysql -h 127.0.0.1 -uroot -proot peq < login_schema.sql`
 
-Now you should have a db that will work with the docker-compose.yml above. 
+Now you should have a db that is almost ready to work with the docker-compose.yml above. 
+
+### One more thing though!
+
+For a fresh db, assuming you've done all the above, you still need to do one more thing. 
+
+After you've brought up the docker-compose.yml stack up above, you will need to run in the EQEmu DB update sql's. There is a script interface packaged in the Docker containers to do this.
+
+Once your stack is up, simply do `docker exec -it eqemu-admin-container /bin/bash`, then run `./utils/scripts/eqemu_server.pl`. Once you're in the script interface, select `database` and then select `check_db_updates` to run in the latest schema updates. EQEmu has a different DB schema than PEQ and this will synchronize them so that EQEmu can operate on it.
+
+Assuming all your files are in place (install_variables.txt is the most important), the script should run in all the pending db updates and then you should be good to go.
