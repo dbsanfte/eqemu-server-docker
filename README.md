@@ -77,8 +77,6 @@ Now you should have a db that is almost ready to work with the docker-compose.ym
 
 For a fresh db, assuming you've done all the above, you still need to do one more thing. 
 
-After you've brought up the docker-compose.yml stack up above, you will need to run in the EQEmu DB update sql's. There is a script interface packaged in the Docker containers to do this.
+After you've brought up the docker-compose stack up above, the eqemu_world container will run a database update script on startup. You will need to monitor its progress with `docker logs eqemu_world_1`, and then do `docker-compose down` and `docker-compose up -d --scale zone=10` again once it's done, so that all containers start up against an updated db schema. 
 
-Once your stack is up, simply do `docker exec -it eqemu-admin-container /bin/bash`, then run `./utils/scripts/eqemu_server.pl`. Once you're in the script interface, select `database` and then select `check_db_updates` to run in the latest schema updates. EQEmu has a different DB schema than PEQ and this will synchronize them so that EQEmu can operate on it.
-
-Assuming all your files are in place (install_variables.txt is the most important), the script should run in all the pending db updates and then you should be good to go.
+Then you should be good to go.
