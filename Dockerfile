@@ -97,8 +97,9 @@ USER eqemu
 RUN perlbrew init && \
     perlbrew install 5.12.5 && \
     perlbrew switch perl-5.12.5 && \
-    perlbrew install-cpanm && \
-    /home/eqemu/perl5/perlbrew/bin/cpanm IO::Stringy && \
+    perlbrew install-cpanm
+
+RUN /home/eqemu/perl5/perlbrew/bin/cpanm IO::Stringy && \
     /home/eqemu/perl5/perlbrew/bin/cpanm JSON && \
     /home/eqemu/perl5/perlbrew/bin/cpanm ETHER/Devel-Declare-0.006019.tar.gz && \
     /home/eqemu/perl5/perlbrew/bin/cpanm -n perl5i
