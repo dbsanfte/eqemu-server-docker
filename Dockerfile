@@ -92,9 +92,16 @@ RUN yes | cpan App::perlbrew
 WORKDIR /home/eqemu
 USER eqemu
 
-RUN /usr/local/bin/perlbrew init && \
-    /usr/local/bin/perlbrew install 5.12.5 && \
-    /usr/local/bin/perlbrew switch perl-5.12.5 
+# One test fails in perl5i install, and google isn't being helpful. We'll see if it breaks anything? :D
+# Downgraded Devel-Declare to avoid a bug in v0.006020+
+RUN perlbrew init && \
+    perlbrew install 5.12.5 && \
+    perlbrew switch perl-5.12.5 && \
+    perlbrew install-cpanm && \
+    cpanm IO::Stringy && \
+    cpanm JSON && \
+    cpanm ETHER/Devel-Declare-0.006019.tar.gz && \
+    cpanm -n perl5i
 
 USER root
 
