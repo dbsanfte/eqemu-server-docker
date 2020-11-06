@@ -87,7 +87,7 @@ RUN ln -s /usr/local/bin /home/eqemu/bin && \
     chown -R eqemu:eqemu /home/eqemu
 
 # Install perlbrew to get specific recommended Perl version 5.12.3
-RUN cpan App::perlbrew <<<yes
+RUN yes | cpan App::perlbrew 
 
 WORKDIR /home/eqemu
 USER eqemu
