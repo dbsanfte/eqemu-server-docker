@@ -86,7 +86,21 @@ COPY --from=0 /home/eqemu/src/utils /home/eqemu/utils
 RUN ln -s /usr/local/bin /home/eqemu/bin && \
     chown -R eqemu:eqemu /home/eqemu
 
+# Install perlbrew to get specific recommended Perl version 5.12.3
+RUN cpan App::perlbrew <<<yes
+
 WORKDIR /home/eqemu
+USER eqemu
+
+RUN /usr/local/bin/perlbrew init && \
+    /usr/local/bin/perlbrew install 5.12.5 && \
+    /usr/local/bin/perlbrew switch perl-5.12.5 
+
+USER root
+
+RUN mv /usr/bin/perl /usr/bin/perl-old && \
+    ln -s /home/eqemu/perl5/perlbrew/perls/perl-5.12.5/bin/perl /usr/bin/perl
+
 USER eqemu
 
 ENTRYPOINT /bin/bash
