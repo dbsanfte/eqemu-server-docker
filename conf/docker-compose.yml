@@ -17,7 +17,7 @@ services:
     network_mode: host
     volumes:
       - quests:/home/eqemu/quests
-      - plugins:/home/eqemu/quests/plugins
+      - plugins:/home/eqemu/plugins
     tty: true
   admin-container:
     container_name: eqemu-admin-container
@@ -33,7 +33,7 @@ services:
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
-      - plugins:/home/eqemu/quests/plugins
+      - plugins:/home/eqemu/plugins
   shared-memory:
     container_name: shared-memory
     image: dbsanfte/eqemu-server:latest
@@ -49,7 +49,7 @@ services:
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
-      - plugins:/home/eqemu/quests/plugins
+      - plugins:/home/eqemu/plugins
   zone:
     image: dbsanfte/eqemu-server:latest
     entrypoint: /usr/local/bin/zone
@@ -67,7 +67,7 @@ services:
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
-      - plugins:/home/eqemu/quests/plugins
+      - plugins:/home/eqemu/plugins
   world:
     image: dbsanfte/eqemu-server:latest
     entrypoint: /usr/local/bin/world
@@ -85,7 +85,7 @@ services:
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
       - maps:/home/eqemu/maps
-      - plugins:/home/eqemu/quests/plugins
+      - plugins:/home/eqemu/plugins
   login:
     image: dbsanfte/eqemu-server:latest
     entrypoint: /usr/local/bin/loginserver
@@ -100,7 +100,7 @@ services:
       - /home/eqemu/install_variables.txt:/home/eqemu/install_variables.txt
       - /home/eqemu/shared:/home/eqemu/shared
       - quests:/home/eqemu/quests
-      - plugins:/home/eqemu/quests/plugins
+      - plugins:/home/eqemu/plugins
       - maps:/home/eqemu/maps
 volumes:
   maps:
