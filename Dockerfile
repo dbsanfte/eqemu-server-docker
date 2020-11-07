@@ -98,17 +98,17 @@ RUN perlbrew init && \
     perlbrew install 5.12.5 && \
     perlbrew switch perl-5.12.5 && \
     perlbrew install-cpanm
-
-RUN /home/eqemu/perl5/perlbrew/bin/cpanm IO::Stringy && \
-    /home/eqemu/perl5/perlbrew/bin/cpanm JSON && \
-    /home/eqemu/perl5/perlbrew/bin/cpanm ETHER/Devel-Declare-0.006019.tar.gz && \
-    /home/eqemu/perl5/perlbrew/bin/cpanm -n perl5i
-
+    
 USER root
 
 RUN mv /usr/bin/perl /usr/bin/perl-old && \
     ln -s /home/eqemu/perl5/perlbrew/perls/perl-5.12.5/bin/perl /usr/bin/perl
 
 USER eqemu
+
+RUN /home/eqemu/perl5/perlbrew/bin/cpanm IO::Stringy && \
+    /home/eqemu/perl5/perlbrew/bin/cpanm JSON && \
+    /home/eqemu/perl5/perlbrew/bin/cpanm ETHER/Devel-Declare-0.006019.tar.gz && \
+    /home/eqemu/perl5/perlbrew/bin/cpanm -n perl5i
 
 ENTRYPOINT /bin/bash
