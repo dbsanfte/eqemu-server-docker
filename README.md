@@ -1,6 +1,9 @@
 # eqemu-server-docker
 Dolalin's eqemu Docker image home. Builds a standalone Docker image of the EQEmu Server.
 
+Released images are pushed to Docker Hub: 
+https://hub.docker.com/r/dbsanfte/eqemu-server
+
 ## How to Use
 
 ### Binaries Included
