@@ -67,7 +67,7 @@ Now:
 
 Finally, to prime the db:
 
-- `wget http://edit.peqtgc.com/weekly/peq_beta.zip -O /tmp/peq_beta.zip`
+- `wget http://db.projecteq.net/latest -O /tmp/peq_beta.zip`
 - `wget https://raw.githubusercontent.com/EQEmu/Server/master/loginserver/login_util/login_schema.sql -O /tmp/login_schema.sql`
 - `cd /tmp/`
 - `unzip -o peq_beta.zip`
