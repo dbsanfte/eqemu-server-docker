@@ -69,8 +69,8 @@ Finally, to prime the db:
 
 - `wget http://db.projecteq.net/latest -O /tmp/peq_dump.zip`
 - `wget https://raw.githubusercontent.com/EQEmu/Server/master/loginserver/login_util/login_schema.sql -O /tmp/login_schema.sql`
-- `cd /tmp/`
-- `unzip -o peq_dump.zip`
+- `cd /tmp`
+- `unzip -o ./peq_dump.zip`
 - `mysql -h 127.0.0.1 -uroot -proot peq < ./peq-dump/create_tables_content.sql`
 - `mysql -h 127.0.0.1 -uroot -proot peq < ./peq-dump/create_tables_player.sql`
 - `mysql -h 127.0.0.1 -uroot -proot peq < ./login_schema.sql`
