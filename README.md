@@ -67,13 +67,13 @@ Now:
 
 Finally, to prime the db:
 
-- `wget http://db.projecteq.net/latest -O /tmp/peq_beta.zip`
+- `wget http://db.projecteq.net/latest -O /tmp/peq_dump.zip`
 - `wget https://raw.githubusercontent.com/EQEmu/Server/master/loginserver/login_util/login_schema.sql -O /tmp/login_schema.sql`
 - `cd /tmp/`
-- `unzip -o peq_beta.zip`
-- `mysql -h 127.0.0.1 -uroot -proot peq < peqbeta.sql`
-- `mysql -h 127.0.0.1 -uroot -proot peq < player_tables.sql`
-- `mysql -h 127.0.0.1 -uroot -proot peq < login_schema.sql`
+- `unzip -o peq_dump.zip`
+- `mysql -h 127.0.0.1 -uroot -proot peq < ./peq-dump/create_tables_content.sql`
+- `mysql -h 127.0.0.1 -uroot -proot peq < ./peq-dump/create_tables_player.sql`
+- `mysql -h 127.0.0.1 -uroot -proot peq < ./login_schema.sql`
 
 Now you should have a db that is almost ready to work with the docker-compose.yml above. 
 
