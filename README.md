@@ -5,6 +5,10 @@ Built weekly off the latest eqemu source tree snapshot, and built Docker images 
 
 https://hub.docker.com/r/dbsanfte/eqemu-server
 
+Quests are built in a seperate project:
+
+https://github.com/dbsanfte/eqemu-quests-docker
+
 ## How to Use
 
 ### Binaries Included
