@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
 ARG eqemu_release_tag=latest
 ENV EQEMU_RELEASE_TAG=$eqemu_release_tag
@@ -48,7 +48,7 @@ RUN cd $EQEMU_BUILD_DIR && \
     make install
 
 # Move files into fresh container to ditch all the cruft:
-FROM ubuntu:bionic
+FROM ubuntu:focal
 
 USER root
 
