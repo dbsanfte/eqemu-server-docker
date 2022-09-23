@@ -14,7 +14,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install build prereqs
 RUN apt-get update -y && \
     apt-get install -y wget software-properties-common apt-transport-https lsb-release && \
-    apt-get install -y libboost-dev libssl-dev libfcgi-dev libstdc++6 libgcc1 libc6 && \
+    apt-get install -y libboost-dev libssl-dev libfcgi-dev libstdc++6 libgcc1 libc6 libboost-date-time-dev \
+                       libboost-filesystem-dev libboost-regex-dev libboost-signals-dev libboost-thread-dev && \
     wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwt40_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwt40.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwtdbo40_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwtdbo40.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwt-dev_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwt-dev.deb && \
@@ -68,7 +69,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && \
     apt-get install -y bash wget curl vim iputils-ping && \
     apt-get install -y software-properties-common apt-transport-https lsb-release && \
-    apt-get install -y libboost-dev libssl-dev libfcgi-dev libstdc++6 libgcc1 libc6 && \
+    apt-get install -y libboost-dev libssl-dev libfcgi-dev libstdc++6 libgcc1 libc6 libboost-date-time-dev \
+                       libboost-filesystem-dev libboost-regex-dev libboost-signals-dev libboost-thread-dev && \
     wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwt40_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwt40.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwtdbo40_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwtdbo40.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwt-dev_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwt-dev.deb && \
