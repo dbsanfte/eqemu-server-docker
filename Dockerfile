@@ -14,8 +14,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install build prereqs
 RUN apt-get update -y && \
     apt-get install -y wget software-properties-common apt-transport-https lsb-release && \
+    apt-get install -y libboost-dev libssl-dev libfcgi-dev libstdc++6 libgcc1 libc6 && \
+    wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwtdbo40_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwtdbo40.deb && \
+    wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwt-dev_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwt-dev.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwtdbo-dev_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwtdbo-dev.deb && \
-    dpkg -i /tmp/libwtdbo*.deb && \
+    dpkg -i /tmp/libwt*.deb && \
     apt-get install -y curl bash vim build-essential cmake cpp debconf-utils g++ gcc \
                        git git-core libio-stringy-perl liblua5.1 liblua5.1-dev \
                        libluabind-dev libmysql++ libperl-dev libperl5i-perl \
@@ -64,8 +67,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && \
     apt-get install -y bash wget curl vim iputils-ping && \
     apt-get install -y software-properties-common apt-transport-https lsb-release && \
+    apt-get install -y libboost-dev libssl-dev libfcgi-dev libstdc++6 libgcc1 libc6 && \
+    wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwtdbo40_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwtdbo40.deb && \
+    wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwt-dev_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwt-dev.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/w/witty/libwtdbo-dev_3.3.6+dfsg-1.1_amd64.deb -O /tmp/libwtdbo-dev.deb && \
-    dpkg -i /tmp/libwtdbo*.deb && \
+    dpkg -i /tmp/libwt*.deb && \
     apt-get install -y liblua5.1 debconf-utils mariadb-client perl unzip minizip \
                         libio-stringy-perl libjson-perl libperl-dev libperl5i-perl && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium-dev_1.0.11-2_amd64.deb -O /tmp/libsodium-dev.deb && \
