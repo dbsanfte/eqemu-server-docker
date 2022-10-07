@@ -14,7 +14,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install build prereqs
 RUN apt-get update -y && \
     apt-get install -y wget software-properties-common apt-transport-https lsb-release && \
-    apt-get install -y curl bash vim build-essential cmake cpp debconf-utils g++ gcc \
+    add-apt-repository ppa:ubuntu-toolchain-r/test && \
+    wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
+    apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" && \
+    apt-get update -y && \
+    apt-get install -y curl bash vim build-essential cmake cpp debconf-utils gcc-10 g++-10 libstdc++6 \
                        git git-core libio-stringy-perl liblua5.1 liblua5.1-dev \
                        libluabind-dev libmysql++ libperl-dev libperl5i-perl \
                        libmysqlclient-dev minizip lua5.1 \
@@ -22,12 +26,13 @@ RUN apt-get update -y && \
                        zlibc libjson-perl libssl-dev && \
     wget -qO - https://ftp-master.debian.org/keys/archive-key-9.asc | apt-key add - && \
     add-apt-repository "deb http://ftp.de.debian.org/debian stretch main" && \
-    add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get update -y && \
-    apt-get install -y gcc-10 g++-10 libwtdbomysql-dev && \
+    apt-get install -y libwtdbomysql-dev && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium-dev_1.0.11-2_amd64.deb -O /tmp/libsodium-dev.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium18_1.0.11-2_amd64.deb -O /tmp/libsodium18.deb && \
-    dpkg -i /tmp/libsodium*.deb 
+    dpkg -i /tmp/libsodium*.deb && \
+    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 100 && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100
 
 # Set eqemu user
 RUN groupadd eqemu && \
