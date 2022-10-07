@@ -22,8 +22,9 @@ RUN apt-get update -y && \
                        zlibc libjson-perl libssl-dev && \
     wget -qO - https://ftp-master.debian.org/keys/archive-key-9.asc | apt-key add - && \
     add-apt-repository "deb http://ftp.de.debian.org/debian stretch main" && \
+    add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get update -y && \
-    apt-get install -y libwtdbomysql-dev && \
+    apt-get install -y gcc-10 g++-10 libwtdbomysql-dev && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium-dev_1.0.11-2_amd64.deb -O /tmp/libsodium-dev.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium18_1.0.11-2_amd64.deb -O /tmp/libsodium18.deb && \
     dpkg -i /tmp/libsodium*.deb 
