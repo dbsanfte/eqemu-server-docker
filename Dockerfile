@@ -15,7 +15,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && \
     apt-get install -y wget software-properties-common apt-transport-https lsb-release && \
     add-apt-repository ppa:ubuntu-toolchain-r/test && \
-    wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
+    wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null && \
     apt-add-repository "deb https://apt.kitware.com/ubuntu/ $(lsb_release -cs) main" && \
     apt-get update -y && \
     apt-get install -y curl bash vim build-essential cmake cpp debconf-utils gcc-10 g++-10 libstdc++6 \
