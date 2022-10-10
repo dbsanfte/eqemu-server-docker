@@ -93,7 +93,8 @@ RUN ln -s /usr/local/bin /home/eqemu/bin && \
     chown -R eqemu:eqemu /home/eqemu
 
 # Install perlbrew to get specific recommended Perl version 5.12.3
-RUN yes | cpan App::perlbrew 
+RUN cpanm Module::Build && \
+    yes | cpan App::perlbrew 
 
 WORKDIR /home/eqemu
 USER eqemu
@@ -113,7 +114,6 @@ RUN mv /usr/bin/perl /usr/bin/perl-old && \
 USER eqemu
 
 RUN /home/eqemu/perl5/perlbrew/bin/cpanm IO::Stringy && \
-    /home/eqemu/perl5/perlbrew/bin/cpanm Module::Build && \
     /home/eqemu/perl5/perlbrew/bin/cpanm JSON && \
     /home/eqemu/perl5/perlbrew/bin/cpanm ETHER/Devel-Declare-0.006019.tar.gz && \
     /home/eqemu/perl5/perlbrew/bin/cpanm -n perl5i
