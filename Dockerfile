@@ -113,6 +113,7 @@ RUN mv /usr/bin/perl /usr/bin/perl-old && \
 USER eqemu
 
 RUN /home/eqemu/perl5/perlbrew/bin/cpanm IO::Stringy && \
+    /home/eqemu/perl5/perlbrew/bin/cpanm Module::Build && \
     /home/eqemu/perl5/perlbrew/bin/cpanm JSON && \
     /home/eqemu/perl5/perlbrew/bin/cpanm ETHER/Devel-Declare-0.006019.tar.gz && \
     /home/eqemu/perl5/perlbrew/bin/cpanm -n perl5i
