@@ -68,7 +68,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update -y && \
     apt-get install -y bash wget curl vim iputils-ping && \
     apt-get install -y software-properties-common apt-transport-https lsb-release && \
-    apt-get install -y liblua5.1 debconf-utils mariadb-client perl perlbrew cpanminus unzip minizip \
+    apt-get install -y liblua5.1 debconf-utils mariadb-client perl perlbrew cpanminus patch unzip minizip \
                         libio-stringy-perl libjson-perl libperl-dev libperl5i-perl && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium-dev_1.0.11-2_amd64.deb -O /tmp/libsodium-dev.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium18_1.0.11-2_amd64.deb -O /tmp/libsodium18.deb && \
