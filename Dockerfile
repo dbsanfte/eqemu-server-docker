@@ -98,9 +98,10 @@ USER eqemu
 # One test fails in perl5i install, and google isn't being helpful. We'll see if it breaks anything? :D
 # Downgraded Devel-Declare to avoid a bug in v0.006020+
 RUN perlbrew init && \
-    perlbrew install 5.12.5 && \
+    perlbrew -v install-patchperl && \
+    perlbrew -v install 5.12.5 && \
     perlbrew switch perl-5.12.5 && \
-    perlbrew install-cpanm
+    perlbrew -v install-cpanm
     
 USER root
 
