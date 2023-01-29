@@ -64,17 +64,20 @@ ENV EQEMU_SRC_DIR=/home/eqemu/src
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Add Xenial for older libmysqlclient20
+# Add Xenial/Bionic for older packages
 RUN echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial main' > /etc/apt/sources.list.d/xenial.list && \
     echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial universe' >>  /etc/apt/sources.list.d/xenial.list && \
-    echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial-updates universe' >> /etc/apt/sources.list.d/xenial.list
+    echo 'deb http://dk.archive.ubuntu.com/ubuntu/ xenial-updates universe' >> /etc/apt/sources.list.d/xenial.list && \
+    echo 'deb http://dk.archive.ubuntu.com/ubuntu/ bionic main' > /etc/apt/sources.list.d/bionic.list && \
+    echo 'deb http://dk.archive.ubuntu.com/ubuntu/ bionic universe' >> /etc/apt/sources.list.d/bionic.list && \
+    echo 'deb http://dk.archive.ubuntu.com/ubuntu/ bionic-updates universe' >> /etc/apt/sources.list.d/bionic.list
 
 # Install minimal packages
 RUN apt-get update -y && \
     apt-get install -y bash wget curl vim iputils-ping && \
     apt-get install -y software-properties-common apt-transport-https lsb-release && \
     apt-get install -y liblua5.1 debconf-utils mariadb-client perl perlbrew cpanminus patch unzip minizip \
-                        libio-stringy-perl libjson-perl libperl-dev libperl5i-perl libmysqlclient20 && \
+                        libio-stringy-perl libjson-perl libperl-dev libperl5i-perl libmysqlclient20 libperl5.26 && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium-dev_1.0.11-2_amd64.deb -O /tmp/libsodium-dev.deb && \
     wget http://ftp.us.debian.org/debian/pool/main/libs/libsodium/libsodium18_1.0.11-2_amd64.deb -O /tmp/libsodium18.deb && \
     dpkg -i /tmp/libsodium*.deb && \
